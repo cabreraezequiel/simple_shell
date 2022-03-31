@@ -32,24 +32,21 @@ int _ls(char **argv)
 
 char **_strtok(char *s)
 {
-	int n = 0, i = 0;
+	int i = 0;
 	char **array;
 
+	array = malloc(sizeof(char) * 10);
 
-	for (i = 0; s[i] != '\0'; i++)
-	{
-		if (s[i] == ' ')
-			n++;
-	}
-
-	array = malloc(sizeof(char *) * (n));
 	if (array == NULL)
 		printf("error\n");
-	i = 0;
 	array[i] = strtok(s, " ");
 	while(array[i] != NULL)
 	{
 		array[++i] = strtok(NULL, " ");
+	}
+	for (i = 0; array[i] != NULL; i++)
+	{
+		printf("array[%d]: %s\n", i, array[i]);
 	}
 
 	return (array);
