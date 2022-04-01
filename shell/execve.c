@@ -22,7 +22,7 @@ int _ls(char **argv)
 	if (child_pid == 0)
 	{
 		if (execve(argv[0], argv, NULL) == -1)
-			perror("Error:");
+			perror("Error");
 	}
 	else
 		wait(&status);
@@ -35,23 +35,19 @@ char **_strtok(char *s)
 	int i = 0;
 	char **array;
 
-	array = malloc(sizeof(char) * 10);
-
+	array = malloc(1024);
 	if (array == NULL)
 		printf("error\n");
+
 	array[i] = strtok(s, " ");
-	while(array[i] != NULL)
+	while(array[i])
 	{
-		array[++i] = strtok(NULL, " ");
-	}
-	for (i = 0; array[i] != NULL; i++)
-	{
-		printf("array[%d]: %s\n", i, array[i]);
+		i++;
+		array[i] = strtok(NULL, " ");
 	}
 
 	return (array);
 }
-
 
 int main(void)
 {
@@ -61,9 +57,9 @@ int main(void)
 
 	printf("$ ");
 
-	if ((nread = getline(&line, &len, stdin)) != -1) {
-		fwrite(line, nread, 1, stdout);
+	while ((nread = getline(&line, &len, stdin)) != -1) {
 		_ls(_strtok(line));
+		printf("$ ");
 	}
 
 	free(line);
