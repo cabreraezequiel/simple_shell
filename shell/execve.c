@@ -13,10 +13,18 @@ int _ls(char **argv);
  *
  * Return: Always 0.
  */
-int _ls(char **argv)
+int exec(char *s)
 {
 	pid_t child_pid;
-	int status;
+	int status, i = 0;
+	char *argv[1024];
+
+	argv[i] = strtok(s, " ");
+	while(argv[i])
+	{
+		i++;
+		argv[i] = strtok(NULL, " ");
+	}
 
 	child_pid = fork();
 	if (child_pid == 0)
@@ -30,25 +38,6 @@ int _ls(char **argv)
 	return (0);
 }
 
-char **_strtok(char *s)
-{
-	int i = 0;
-	char **array;
-
-	array = malloc(1024);
-	if (array == NULL)
-		printf("error\n");
-
-	array[i] = strtok(s, " ");
-	while(array[i])
-	{
-		i++;
-		array[i] = strtok(NULL, " ");
-	}
-
-	return (array);
-}
-
 int main(void)
 {
 	char *line = NULL;
@@ -58,7 +47,7 @@ int main(void)
 	printf("$ ");
 
 	while ((nread = getline(&line, &len, stdin)) != -1) {
-		_ls(_strtok(line));
+		exec(line);
 		printf("$ ");
 	}
 
