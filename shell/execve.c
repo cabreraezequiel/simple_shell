@@ -17,12 +17,9 @@ int exec(char *s)
 {
 	pid_t child_pid;
 	int status, i = 0;
-	char *str;
 	char *argv[1024];
 
-	str = malloc(sizeof(*s));
-	str = strtok(s, "\n");
-	argv[i] = strtok(str, " ");
+	argv[i] = strtok(s, " " "\n");
 	while(argv[i + 1] != NULL)
 	{
 		i++;
