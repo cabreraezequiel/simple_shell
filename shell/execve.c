@@ -17,10 +17,13 @@ int exec(char *s)
 {
 	pid_t child_pid;
 	int status, i = 0;
+	char *str;
 	char *argv[1024];
 
-	argv[i] = strtok(s, " ");
-	while(argv[i])
+	str = malloc(sizeof(*s));
+	str = strtok(s, "\n");
+	argv[i] = strtok(str, " ");
+	while(argv[i + 1] != NULL)
 	{
 		i++;
 		argv[i] = strtok(NULL, " ");
@@ -47,6 +50,8 @@ int main(void)
 	printf("$ ");
 
 	while ((nread = getline(&line, &len, stdin)) != -1) {
+		if (!strcmp("exit", line) == -1)
+			break;
 		exec(line);
 		printf("$ ");
 	}
