@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char **environ;
 
 /**
  * main - execve example
@@ -16,10 +17,18 @@ int exec(char *s)
 	pid_t child_pid;
 	int status, i = 0;
 	char *argv[1024];
-	char *delim[] = {" ", "\n", "\t"};
+/*	char *path[1024];
+ 	char *subpath = getenv("PATH");
 
-/*	argv = malloc(sizeof(*s));
- */
+	path[i] = strtok(subpath, ":" "\n");
+	while(path[i] != NULL)
+	{
+		path[++i] = strtok(NULL, ":" "\n");
+	}
+	i = 0;
+
+	argv = malloc(sizeof(*s));
+*/
 	argv[i] = strtok(s, " " "\n" "\t");
 	while(argv[i] != NULL)
 	{
@@ -29,7 +38,7 @@ int exec(char *s)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execvp(argv[0], argv) == -1)
 			perror("Error");
 	}
 	else
