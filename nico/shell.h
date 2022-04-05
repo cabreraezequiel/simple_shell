@@ -10,5 +10,6 @@
 
 int exec(char *s);
 int f_cd(char **args);
+int check_for_EOF();
 
 #endif

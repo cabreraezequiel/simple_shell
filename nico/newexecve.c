@@ -8,11 +8,15 @@
 
 int main()
 {
-	while (1)
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t nread;
+
+	while ((nread = getline(&line, &len, stdin)) != -1)
 	{
 		char command[100];
+
 		printf("$ ");
-		scanf(" %99[^\n]", command);
 
 		if (!strcmp("exit", command))
 			break;
