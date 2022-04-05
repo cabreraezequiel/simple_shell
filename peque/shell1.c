@@ -20,6 +20,7 @@ int exec(char *s)
 {
 	pid_t child_pid;
 	int status, i = 0;
+	int rv;
 	char *argv[1024];
 /*	char *path[1024];
  	char *subpath = getenv("PATH");
@@ -47,6 +48,12 @@ int exec(char *s)
 		return(0);
 	}
 
+	if((strcmp(argv[0], "$?") == 0))
+	{
+		printf("%d\n", rv);
+		return(0);
+	}
+
 	if((strcmp(argv[0], "exit") == 0))
 	{
 		_exit_(argv[1]);
@@ -56,7 +63,7 @@ int exec(char *s)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		if (execvp(argv[0], argv) == -1)
+		if ((rv = execvp(argv[0], argv)) == -1)
 			perror("Error");
 	}
 	else
