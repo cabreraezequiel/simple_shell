@@ -10,7 +10,7 @@
 extern char **environ;
 void printenv(void);
 void _chdir(char *path);
-
+void _exit_(char *stat);
 /**
  * main - execve example
  *
@@ -45,6 +45,11 @@ int exec(char *s)
 	{
 		_chdir(argv[1]);
 		return(0);
+	}
+
+	if((strcmp(argv[0], "exit") == 0))
+	{
+		_exit_(argv[1]);
 	}
 
 /*	if (stat(argv[0], ) != -1)*/
@@ -85,6 +90,19 @@ void printenv(void)
 	for(i = 0; environ[i] != NULL; i++)
 	{
 		printf("%s\n", environ[i]);
+	}
+}
+
+void _exit_(char *stat)
+{
+	int status;
+
+	if (stat == NULL)
+		exit(0);
+	else
+	{
+		status = atoi(stat);
+		exit(status);
 	}
 }
 
