@@ -9,7 +9,7 @@
 
 extern char **environ;
 void printenv(void);
-void _chdir(char *path);
+void _chdir();
 
 /**
  * main - execve example
@@ -41,21 +41,18 @@ int exec(char *s)
 		argv[++i] = strtok(NULL, " " "\n" "\t");
 	}
 
-	if((strcmp(argv[0], "cd") == 0))
+printf ("argv[0]: %s", argv[0]);
+	if(argv[0] == "env")
 	{
-		_chdir(argv[1]);
+		printenv();
 		return(0);
 	}
 
-/*	if (stat(argv[0], ) != -1)*/
-	child_pid = fork();
-	if (child_pid == 0)
+if([0] == "cd")
 	{
-		if (execvp(argv[0], argv) == -1)
-			perror("Error");
+		_chdir();
+		return(0);
 	}
-	else
-		wait(&status);
 
 	return (0);
 }
@@ -88,19 +85,7 @@ void printenv(void)
 	}
 }
 
-void _chdir(char *path)
+void _chdir()
 {
-	char s[100];
-
-	if (path == NULL)
-		chdir("/root");
-
-	else if ((strcmp(path, "-") == 0))
-	{
-	    	chdir("..");
-	    	printf("%s\n", getcwd(s, 100));
-	}
-
-	else
-		chdir(path);
+	printf("%s\n", "hola");
 }
