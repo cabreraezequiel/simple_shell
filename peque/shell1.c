@@ -4,8 +4,10 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 extern char **environ;
+void printenv(void);
 
 /**
  * main - execve example
@@ -29,12 +31,18 @@ int exec(char *s)
 
 	argv = malloc(sizeof(*s));
 */
+	*argv = NULL;
 	argv[i] = strtok(s, " " "\n" "\t");
+	if(argv[0] == "env")
+	{
+		printenv();
+		return(0);
+	}
 	while(argv[i] != NULL)
 	{
 		argv[++i] = strtok(NULL, " " "\n" "\t");
 	}
-
+/*	if (stat(argv[0], ) != -1)*/
 	child_pid = fork();
 	if (child_pid == 0)
 	{
@@ -64,4 +72,14 @@ int main(void)
 
 	free(line);
 	exit(EXIT_SUCCESS);
+}
+
+void printenv(void)
+{
+	int i;
+
+	for(i = 0; environ[i] != NULL; i++)
+	{
+		printf("%s\n", environ[i]);
+	}
 }
