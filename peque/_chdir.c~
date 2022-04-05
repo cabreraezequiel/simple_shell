@@ -1,0 +1,8 @@
+void _chdir(char *s)
+{
+	chdir(s);
+}
+void main (void);
+{
+	_chdir("/bin");
+}

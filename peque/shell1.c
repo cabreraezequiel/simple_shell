@@ -1,3 +1,4 @@
+#include "main.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -8,6 +9,7 @@
 
 extern char **environ;
 void printenv(void);
+void _chdir(const char *path);
 
 /**
  * main - execve example
@@ -33,15 +35,24 @@ int exec(char *s)
 */
 	*argv = NULL;
 	argv[i] = strtok(s, " " "\n" "\t");
+
+	while(argv[i] != NULL)
+	{
+		argv[++i] = strtok(NULL, " " "\n" "\t");
+	}
+
 	if(argv[0] == "env")
 	{
 		printenv();
 		return(0);
 	}
-	while(argv[i] != NULL)
+
+	if(argv[0] == "cd")
 	{
-		argv[++i] = strtok(NULL, " " "\n" "\t");
+		_chdir(argv[1]);
+		return(0);
 	}
+
 /*	if (stat(argv[0], ) != -1)*/
 	child_pid = fork();
 	if (child_pid == 0)
@@ -63,9 +74,8 @@ int main(void)
 
 	printf("#cisfun$ ");
 
-	while ((nread = getline(&line, &len, stdin)) != -1) {
-		if (!strcmp("exit", line) == -1)
-			break;
+	while ((nread = getline(&line, &len, stdin)) != -1)
+	{
 		exec(line);
 		printf("#cisfun$ ");
 	}
@@ -82,4 +92,9 @@ void printenv(void)
 	{
 		printf("%s\n", environ[i]);
 	}
+}
+
+void _chdir(const char *path)
+{
+	printf("%s\n", path);
 }
