@@ -9,8 +9,8 @@
 
 extern char **environ;
 void printenv(void);
-void _chdir(const char *path);
-
+void _chdir(char *path);
+void _exit_(char *stat);
 /**
  * main - execve example
  *
@@ -20,6 +20,7 @@ int exec(char *s)
 {
 	pid_t child_pid;
 	int status, i = 0;
+	int rv;
 	char *argv[1024];
 /*	char *path[1024];
  	char *subpath = getenv("PATH");
@@ -41,23 +42,34 @@ int exec(char *s)
 		argv[++i] = strtok(NULL, " " "\n" "\t");
 	}
 
-	if(strcmp(argv[0], "history"))
-	{
-		print_history();
-		return(0);
-	}
-
-	if(argv[0] == "cd")
+	if((strcmp(argv[0], "cd") == 0))
 	{
 		_chdir(argv[1]);
 		return(0);
+	}
+
+	if((strcmp(argv[0], "$?") == 0))
+	{
+		printf("%d\n", rv);
+		return(0);
+	}
+
+	if((strcmp(argv[0], "exit") == 0))
+	{
+		_exit_(argv[1]);
+	}
+
+	if ((strcmp(argv[0], "history") == 0))
+	{
+		print_history();
+		return (0);
 	}
 
 /*	if (stat(argv[0], ) != -1)*/
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		if (execvp(argv[0], argv) == -1)
+		if ((rv = execvp(argv[0], argv)) == -1)
 			perror("Error");
 	}
 	else
@@ -72,8 +84,8 @@ int main(void)
 	size_t len = 0;
 	ssize_t nread;
 	char *filename = ".simple_shell_history";
-	int f, count = 0;
-	
+	int f;
+
 	f = open(filename, O_CREAT | O_RDWR, 0600);
 
 	printf("#cisfun$ ");
@@ -83,8 +95,8 @@ int main(void)
 		write(f, line, strlen(line));
 		exec(line);
 		printf("#cisfun$ ");
-		count++;
 	}
+
 	free(line);
 	close(f);
 	exit(EXIT_SUCCESS);
@@ -100,7 +112,32 @@ void printenv(void)
 	}
 }
 
-void _chdir(const char *path)
+void _exit_(char *stat)
 {
-	printf("%s\n", path);
+	int status;
+
+	if (stat == NULL)
+		exit(0);
+	else
+	{
+		status = atoi(stat);
+		exit(status);
+	}
+}
+
+void _chdir(char *path)
+{
+	char s[100];
+
+	if (path == NULL)
+		chdir("/root");
+
+	else if ((strcmp(path, "-") == 0))
+	{
+	    	chdir("..");
+	    	printf("%s\n", getcwd(s, 100));
+	}
+
+	else
+		chdir(path);
 }

@@ -8,5 +8,6 @@
 #include <unistd.h>
 
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+void print_history();
 
 #endif /* MAIN */
