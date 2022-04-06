@@ -9,7 +9,8 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <stddef.h>
-
+#include <sys/types.h>
+#include <fcntl.h>
 
 /**
  * struct format - Struct
@@ -28,7 +29,7 @@ typedef struct format
 void _chdir(char *path);
 void _exit_(char *stat);
 int exec(char *s);
-
+void print_history(char *filename);
 extern char **environ;
 
 #endif /* MAIN */
