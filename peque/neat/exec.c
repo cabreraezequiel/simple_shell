@@ -58,7 +58,7 @@ int exec(char *s)
 */
 	if((strcmp(argv[0], "exit") == 0))
 	{
-		_exit_(argv[1]);
+		_exit_(argv[1], s);
 	}
 
 /*	if ((strcmp(argv[0], "history") == 0))

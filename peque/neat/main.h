@@ -27,7 +27,7 @@ typedef struct format
 
 
 void _chdir(char *path);
-void _exit_(char *stat);
+void _exit_(char *stat, char *s);
 int exec(char *s);
 /*void print_history(char *filename);*/
 extern char **environ;
