@@ -1,28 +1,10 @@
 #include "main.h"
 
-/*int (*aux(char c))(va_list)
-{
-	Tformat form[] = {
-		{"cd", _chdir},
-		{"exit", _exit_},
-		{NULL, NULL}
-	};
-	int i;
-
-	for (i = 0; form[i].op != NULL; i++)
-	{
-		if (c == *form[i].op)
-			break;
-	}
-	return (form[i].f);
-}
-*/
 
 int exec(char *s)
 {
 	pid_t child_pid;
-	int status, i = 0;
-	int rv = 0;
+	int status, i = 0, rv = 0;
 	char *argv[1024];
 /*	char *path[1024];
  	char *subpath = getenv("PATH");
@@ -40,15 +22,10 @@ int exec(char *s)
 	argv[i] = strtok(s, " " "\n" "\t");
 
 	while(argv[i] != NULL)
-	{
 		argv[++i] = strtok(NULL, " " "\n" "\t");
-	}
 
-	if((strcmp(argv[0], "cd") == 0))
-	{
-		_chdir(argv[1]);
-		return(0);
-	}
+	if((_strcmp(argv[0], "cd") == 0))
+		return(_chdir(argv));
 
 /*	if((strcmp(argv[0], "$?") == 0))
 	{
@@ -56,10 +33,8 @@ int exec(char *s)
 		return(0);
 	}
 */
-	if((strcmp(argv[0], "exit") == 0))
-	{
+	if((_strcmp(argv[0], "exit") == 0))
 		_exit_(argv[1], s);
-	}
 
 /*	if ((strcmp(argv[0], "history") == 0))
 	{
@@ -69,11 +44,10 @@ int exec(char *s)
 */
 /*	if (stat(argv[0], ) != -1)*/
 	child_pid = fork();
-	if (child_pid == 0)
-	{
+	if (child_pid == 0) {
 		if ((rv = execvp(argv[0], argv)) == -1)
-			perror("Error");
-	}
+			perror("Error"); }
+
 	else
 		wait(&status);
 
