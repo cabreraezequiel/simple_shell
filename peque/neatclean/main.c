@@ -12,6 +12,8 @@ int main(void)
 	ssize_t nread;
 
 	printf("#cisfun$ ");
+	
+	signal(SIGINT, sighand);
 
 	while ((nread = getline(&line, &len, stdin)) != -1)
 	{
