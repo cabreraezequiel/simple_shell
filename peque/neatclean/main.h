@@ -33,6 +33,7 @@ int exec(char *s);
 /*void sig_handler(int signum)*/
 int _strcmp(char *s1, char *s2);
 void sighand(__attribute__((unused)) int sighandv);
+int filecheck(char *filename);
 /*void print_history(char *filename);*/
 extern char **environ;
 

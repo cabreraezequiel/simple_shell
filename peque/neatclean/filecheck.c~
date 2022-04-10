@@ -1,0 +1,18 @@
+#include "main.h"
+
+int filecheck(char *filename)
+{
+	char *s = _getenv("PATH");
+
+	strcat(strtok(s, ":"), filename);
+
+	while (filename != NULL)
+	{
+		if (access(filename, F_OK) = 0)
+			return (0);
+	}
+
+	return (1);
+
+
+}
