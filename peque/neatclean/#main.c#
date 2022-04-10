@@ -13,8 +13,6 @@ int main(void)
 
 	printf("$ ");
 
-	signal(SIGINT, sighand);
-
 	while ((nread = getline(&line, &len, stdin)) != -1)
 	{
 		exec(line);

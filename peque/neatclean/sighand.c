@@ -2,5 +2,5 @@
 
 void sighand(__attribute__((unused)) int sighandv)
 {
-	write(STDIN_FILENO, "\n#cisfun$ ", 10);
+	write(STDIN_FILENO, "\n$ ", 4);
 }
