@@ -58,15 +58,21 @@ int exec(char *s)
 */
 	if((strcmp(argv[0], "exit") == 0))
 	{
-		_exit_(argv[1]);
+		_exit_(argv[1], s);
 	}
 
-/*	if ((strcmp(argv[0], "history") == 0))
+	if ((strcmp(argv[0], "history") == 0))
 	{
 		print_history(".simple_shell_history");
 		return (0);
 	}
-*/
+
+/*	if ((strcmp(argv[0], "help") == 0))
+	{
+		_help(builtin_str);
+		return (0);
+	}*/
+
 /*	if (stat(argv[0], ) != -1)*/
 	child_pid = fork();
 	if (child_pid == 0)

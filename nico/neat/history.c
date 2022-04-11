@@ -1,15 +1,16 @@
 #include "main.h"
 
+
 int countlines(char *filename)
 {
 	FILE *fp = fopen(filename,"r");
-	int ch=0;
-	int lines=0;
+	int ch = 0;
+	int lines = 0;
 
 	if (fp == NULL)
 		return 0;
 
-	lines++;
+/*	lines++;*/
 	while(!feof(fp))
 	{
 		ch = fgetc(fp);
@@ -26,7 +27,7 @@ void print_history(char *filename)
 {
 	char *buf;
 	size_t size;
-	int f, i = 0, n;
+	int f, i = 0, n = 0;
 	char *tok[1024];
 	struct stat st;
 	
@@ -39,6 +40,7 @@ void print_history(char *filename)
 	read(f, buf, size);
 
 	n = countlines(filename);
+
 /*	tok = malloc(1);
 
 	for (n = 0; n != EOF; n++)
@@ -61,8 +63,10 @@ void print_history(char *filename)
 		tok[++i] = strtok(NULL, "\n");
 	}
 
+
 /*	free(tok);
  */
+
 	free(buf);
 	close(f);
 }

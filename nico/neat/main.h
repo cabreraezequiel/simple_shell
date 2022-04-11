@@ -25,11 +25,15 @@ typedef struct format
 
 } Tformat;
 
-
 void _chdir(char *path);
-void _exit_(char *stat);
+void _exit_(char *stat, char *s);
 int exec(char *s);
-/*void print_history(char *filename);*/
+void print_history(char *filename);
+int _help(char **args);
+int launch(char **args);
+int execute(char **args);
+int num_builtins();
+
 extern char **environ;
 
 #endif /* MAIN */
