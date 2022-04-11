@@ -6,48 +6,35 @@
  * Return: 0 if it exists, 1 otherwise
  */
 
-int filecheck(char *filename)
+int filecheck(char *filename, const char **path)
 {
 	int i = 0;
-	char *s;
-	char *tok;
 	char str[120];
 	char file[120] = "/";
 	char *res;
-	char **patho = path();
 
-
-	printf("%s\n", patho[i]);
-	s = malloc(sizeof(_getenv("PATH")));
-	s =_getenv("PATH");
-	printf("s: %s\n", s);
-
+	printf("file: %s\n", file);
 	strcat(file, filename);
-	tok = strtok(s, ":\n");
-
-	printf("filename: %s\n", filename);
-	printf("entra en filecheck\n");
-	printf("tok: %s\n", tok);
-	printf("s: %s\n", s);
-
-	while (tok != NULL)
+	printf("file: %s\n", file);
+	printf("i: %d\n", i);
+	printf("patho: %s\n", path[i]);
+	while (path[i] != NULL)
 	{
-		_strcpy(str, tok);
+		printf("file: %s\n", file);
+		_strcpy(str, path[i]);
 		res = str_concat(str, file);
-		printf("res: %s\n", res);
-		printf("tok : %s\n", tok);
 
+		printf("str: %s\n", str);
 		if (access(res, F_OK) == 0)
 		{
-			free(s);
-			free(res);
-			free(patho);
+			file[0] = 0;
 			return (0);
 		}
 
-		tok = strtok(NULL, ":\n");
 		str[0] = 0;
+		i++;
 	}
-
+	str[0] = 0;
+	file[0] = 0;
 	return (1);
 }

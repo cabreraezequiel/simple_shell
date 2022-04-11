@@ -25,14 +25,15 @@ int exec(char *s)
 	if ((_strcmp(argv[0], "exit") == 0))
 		_exit_(argv[1], s);
 
-/*	if (filecheck(argv[0]) == 0) {*/
+	if (filecheck(argv[0], path()) == 0)
+	{
 	child_pid = fork();
 
 	if (child_pid == 0)
 	{
 		if (execvp(argv[0], argv) == -1)
 			perror("Error");
-	}
+	}}
 
 	else
 		wait(&status);

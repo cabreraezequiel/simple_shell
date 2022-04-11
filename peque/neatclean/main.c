@@ -21,21 +21,9 @@ int main(void)
 
 	while ((fg = getline(&line, &len, stdin)) != -1)
 	{
-
-/*		while(EOF)
-	{
-*/
-		
 		exec(line);
-
-/*		exit(0);
-		}*/
-/*	else*/	if (isatty(0))
-	{
-
-		printf("$ ");
-/*	sleep(3);*/
-	}}
+		if (isatty(0))
+			printf("$ "); }
 
 	free(line);
 	exit(EXIT_SUCCESS);
