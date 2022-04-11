@@ -38,15 +38,3 @@ char *_getenv(char *s)
 	}
 	return (NULL);
 }
-
-char **path(void)
-{
-	int i = 0;
-	char **argv;
-	argv = malloc(1024);
-	argv[i] = strtok(_getenv("PATH"), ":\n");
-
-	while (argv[i] != NULL)
-		argv[++i] = strtok(NULL, ":\n");
-	return(argv);
-}

@@ -30,16 +30,9 @@ typedef struct format
 int _chdir(char **path);
 void _exit_(char *stat, char *s);
 int exec(char *s);
-/*void sig_handler(int signum)*/
+void sig_handler(int signum);
 int _strcmp(char *s1, char *s2);
-void sighand(__attribute__((unused)) int sighandv);
-int filecheck(char *filename);
 /*void print_history(char *filename);*/
 extern char **environ;
-char *_getenv(char *s);
-char *_strcpy(char *dest, char *src);
-char *_strcat(char *dest, char *src);
-char *str_concat(char *s1, char *s2);
-char **path(void);
 
 #endif /* MAIN */

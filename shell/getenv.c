@@ -5,5 +5,4 @@ void main (void)
 {
 	char *s = getenv ("PATH");
 
-	
 }
