@@ -9,7 +9,7 @@
 int exec(char *s)
 {
 	pid_t child_pid;
-	int status, i = 0;
+	int status = 0, i = 0;
 	char *argv[1024];
 	char *str = NULL;
 

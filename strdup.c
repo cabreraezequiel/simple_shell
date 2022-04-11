@@ -10,7 +10,7 @@
 
 char *_strdup(char *str)
 {
-	char *stra;
+	char *stra = NULL;
 	unsigned int n = 0;
 	int size = 1;
 
@@ -22,9 +22,10 @@ char *_strdup(char *str)
 	{
 		size++;
 	}
-	stra = malloc(sizeof(char) * size);
+	stra = calloc(1, sizeof(char) * size);
 	if (stra == NULL)
 	{
+		free(stra);
 		return (NULL);
 	}
 	for (n = 0; str[n] != '\0'; n++)

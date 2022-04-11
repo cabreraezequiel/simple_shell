@@ -40,6 +40,8 @@ char *_getenv(char *s)
 				free(str);
 				return(aux);
 			}
+			else
+				free(str);
 		}
 	}
 	return (NULL);
@@ -62,7 +64,6 @@ char **path()
 		argv[++i] = strtok(NULL, ":\n");
 	}
 	free(s);
-	free(aux);
 
 	return(argv);
 }
