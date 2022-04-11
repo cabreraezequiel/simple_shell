@@ -30,7 +30,7 @@ int exec(char *s)
 
 	if (child_pid == 0)
 	{
-		if (execve(argv[0], argv, environ) == -1)
+		if (execvp(argv[0], argv) == -1)
 			perror("Error"); }
 
 	else

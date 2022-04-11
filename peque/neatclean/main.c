@@ -9,16 +9,33 @@ int main(void)
 {
 	char *line = NULL;
 	size_t len = 0;
+	int fg;
 
-	printf("$ ");
+	if (isatty(0))
+	{
+
+		printf("$ ");
+	}
 
 	signal(SIGINT, sighand);
 
-	while ((getline(&line, &len, stdin)) != -1)
+	while ((fg = getline(&line, &len, stdin)) != -1)
 	{
+
+/*		while(EOF)
+	{
+*/
+		
 		exec(line);
+
+/*		exit(0);
+		}*/
+/*	else*/	if (isatty(0))
+	{
+
 		printf("$ ");
-	}
+/*	sleep(3);*/
+	}}
 
 	free(line);
 	exit(EXIT_SUCCESS);

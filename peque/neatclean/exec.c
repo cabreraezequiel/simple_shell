@@ -31,7 +31,8 @@ int exec(char *s)
 	if (child_pid == 0)
 	{
 		if (execvp(argv[0], argv) == -1)
-			perror("Error"); }
+			perror("Error");
+	}
 
 	else
 		wait(&status);
