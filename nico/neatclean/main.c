@@ -9,17 +9,22 @@ int main(void)
 {
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t nread;
+	int fg;
 
-	printf("#cisfun$ ");
-
-	while ((nread = getline(&line, &len, stdin)) != -1)
+	if (isatty(0))
 	{
-		exec(line);
-		printf("#cisfun$ ");
+
+		printf("$ ");
 	}
 
+	signal(SIGINT, sighand);
+
+	while ((fg = getline(&line, &len, stdin)) != -1)
+	{
+		exec(line);
+		if (isatty(0))
+			printf("$ "); }
+
 	free(line);
-	close(nread);
 	exit(EXIT_SUCCESS);
 }
