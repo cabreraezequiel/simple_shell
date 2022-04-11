@@ -9,14 +9,14 @@
 char *filecheck(char *filename)
 {
 	int i = 0;
-	char *str;
+	char *str = NULL;
 	char file[120] = "/";
 	char **patho = path();
-	char *res;
+	char *res = NULL;
 	struct stat buffer;
 
 	strcat(file, filename);
-	
+
 	while (patho[i] != NULL)
 	{
 		str = _strdup(patho[i]);
@@ -24,13 +24,18 @@ char *filecheck(char *filename)
 
 		if (stat(res, &buffer) == 0)
 		{
+			free(patho);
+			free(str);
 			file[0] = 0;
 			return (res);
 		}
 
+		free(res);
 		free(str);
 		i++;
 	}
+	free(patho);
+	free(str);
 	file[0] = 0;
 	return (NULL);
 }
