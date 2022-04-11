@@ -25,7 +25,7 @@ int exec(char *s)
 	if ((_strcmp(argv[0], "exit") == 0))
 		_exit_(argv[1], s);
 
-	if (filecheck(argv[0], path()) == 0)
+	if (filecheck(argv[0]) == 0)
 	{
 	child_pid = fork();
 

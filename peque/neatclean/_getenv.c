@@ -9,6 +9,7 @@
 char *_getenv(char *s)
 {
 	int i = 0, bol = 0, n = 0;
+	char *str;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
@@ -32,23 +33,32 @@ char *_getenv(char *s)
 
 		if (bol > 0)
 		{
-			if (_strcmp(strtok(environ[i], "=\n"), s) == 0)
+			str = _strdup(environ[i]);
+			if (_strcmp(strtok(str, "=\n"), s) == 0)
 				return (strtok(NULL, "=\n"));
 		}
 	}
 	return (NULL);
 }
 
-const char **path(void)
+char **path(void)
 {
 	int i = 0;
-	const char **argv;
+	char **argv;
+	char *s;
+
+	printf("hola\n");
 	argv = malloc(1024);
-	argv[i] = strtok(_getenv("PATH"), ":\n");
-	
+
+	s = _strdup(_getenv("PATH"));
+	printf("s: %s\n", s);
+	argv[i] = strtok(s, ":\n");
+
 	while (argv[i] != NULL) {
 		printf("path[%d]: %s\n", i, argv[i]);
-		argv[++i] = strtok(NULL, ":\n"); }
+		argv[++i] = strtok(NULL, ":\n");
+	}
+	free(s);
 
 	return(argv);
 }
