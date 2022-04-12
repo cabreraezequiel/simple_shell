@@ -11,7 +11,7 @@ int exec(char *s)
 	pid_t child_pid;
 	int status = 0, i = 0;
 	char *argv[1024];
-	char *str = NULL;
+/*	char *str = NULL;*/
 
 	argv[i] = strtok(s, " \n\t");
 	if (argv[0]  == NULL)
@@ -26,21 +26,21 @@ int exec(char *s)
 	if ((_strcmp(argv[0], "exit") == 0))
 		_exit_(argv[1], s);
 
-	str = filecheck(argv[0]);
-	if (str != NULL)
-	{
+/*	str = filecheck(argv[0]);*/
+/*	if (str != NULL)*/
+/*	{*/
+
 	child_pid = fork();
 
 	if (child_pid == 0)
 	{
-		if (execve(str, argv, environ) == -1)
+		if (execvp(argv[0], argv) == -1)
 			perror("Error");
 	}
 
 	else
 		wait(&status);
-	}
-	free(str);
+/*	free(str);*/
 
-	return (1);
+	return (0);
 }
