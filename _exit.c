@@ -13,12 +13,12 @@ void _exit_(char *stat, char *s)
 	if (stat == NULL)
 	{
 		free(s);
-		exit(EXIT_SUCCESS);
+		exit(0);
 	}
 
 	else
 	{
-		status = 2/*atoi(stat)*/;
+		status = atoi(stat);
 		free(s);
 		exit(status);
 	}
