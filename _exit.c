@@ -13,16 +13,12 @@ void _exit_(char *stat, char *s)
 	if (stat == NULL)
 	{
 		free(s);
-		exit(2);
+		exit(EXIT_SUCCESS);
 	}
 
 	else
 	{
-		if(strstr(stat, "-"))
-			status = - atoi(stat);
-		else
-			status = atoi(stat);
-
+		status = 2/*atoi(stat)*/;
 		free(s);
 		exit(status);
 	}
