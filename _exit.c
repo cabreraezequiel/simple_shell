@@ -18,7 +18,7 @@ void _exit_(char *stat, char *s)
 
 	else
 	{
-		status = atoi(stat);
+		status = 2/*atoi(stat)*/;
 		free(s);
 		exit(status);
 	}
