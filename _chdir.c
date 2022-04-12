@@ -34,7 +34,9 @@ int _chdir(char **path)
 
 	else
 	{
-		chdir(path[1]);
+		if (chdir(path[1]) == -1)
+			fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", path[1]);
+
 		setenv("PWD", getcwd(s, 100), 1);
 		return (0);
 	}
