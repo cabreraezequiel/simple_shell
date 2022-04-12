@@ -1,3 +1,5 @@
+![Holberton School](https://user-images.githubusercontent.com/81387977/155136726-0acad71c-42d2-41f0-ad62-784d315048b8.png)
+
 # Welcome to our Shell!
 
 In computing, a shell is a computer program which exposes an operating system's services to a human user or other programs. In general, operating system shells use either a command-line interface (CLI) or graphical user interface (GUI), depending on a computer's role and particular operation. It is named a shell because it is the outermost layer around the operating system.
