@@ -13,9 +13,6 @@ int _chdir(char **path)
 	s[0] = 0;
 	setenv("PWD", getcwd(s, 100), 1);
 
-/*	if (!path[2])
-		return (1);
-*/
 	if (path[1] == NULL || (_strcmp(path[1], "$HOME")) == 0)
 	{
 		chdir(getenv("HOME"));
