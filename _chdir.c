@@ -10,9 +10,11 @@ int _chdir(char **path)
 {
 	char s[100];
 
-	if (path[2] != NULL)
-		return (1);
+	s[0] = 0;
 
+/*	if (!path[2])
+		return (1);
+*/
 	setenv("OLDPWD", getcwd(s, 100), 1);
 
 	if (path[1] == NULL || (_strcmp(path[1], "$HOME")) == 0)
