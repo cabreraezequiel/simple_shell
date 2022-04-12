@@ -13,7 +13,7 @@ void _exit_(char *stat, char *s)
 	if (stat == NULL)
 	{
 		free(s);
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 
 	else
