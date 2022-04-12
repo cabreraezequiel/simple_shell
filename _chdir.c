@@ -10,18 +10,24 @@ int _chdir(char **path)
 {
 	char s[100];
 
-	if (path[2] != NULL)
+	s[0] = 0;
+
+/*	if (!path[2])
 		return (1);
+*/
+	setenv("OLDPWD", getcwd(s, 100), 1);
 
 	if (path[1] == NULL || (_strcmp(path[1], "$HOME")) == 0)
 	{
-		chdir("/root");
+		chdir(getenv("HOME"));
+		setenv("PWD", getcwd(s, 100), 1);
 		return (0);
 	}
 
 	else if ((_strcmp(path[1], "-") == 0))
 	{
-		chdir("..");
+		chdir(getenv("OLDPWD"));
+		setenv("PWD", getcwd(s, 100), 1);
 		printf("%s\n", getcwd(s, 100));
 		return (0);
 	}
@@ -29,6 +35,7 @@ int _chdir(char **path)
 	else
 	{
 		chdir(path[1]);
+		setenv("PWD", getcwd(s, 100), 1);
 		return (0);
 	}
 }
